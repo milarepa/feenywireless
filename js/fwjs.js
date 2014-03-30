@@ -1,9 +1,7 @@
 $(document).ready(function() {
-    $('form').submit(function(event) { //Trigger on form submit
+    $('postForm').submit(function(event) { //Trigger on form submit
         $('#name + .throw_error').empty(); //Clear the messages first
         $('#success').empty();
-
-            //Validate fields if required using jQuery
 
         var postForm = { //Fetch form data
             'name'  : $('input[name=name]').val() //Store name fields value
@@ -11,7 +9,7 @@ $(document).ready(function() {
 
         $.ajax({ //Process the form using $.ajax()
             type        : 'POST', //Method type
-            url         : 'lgn.php', //Your form processing file url
+            url         : '../lib/lgn.php', //Your form processing file url
             data        : postForm, //Forms name
             dataType    : 'json',
             success     : function(data) {
@@ -21,10 +19,10 @@ $(document).ready(function() {
                     $('.throw_error').fadeIn(1000).html(data.errors.name); //Throw relevant error
                 }
             } else {
-                    $('#success').fadeIn(1000).append('<p>' + data.posted + '</p>'); //If successful, than throw a success message
+                    $('#success').fadeIn(1000).append('<p>' + data.posted + '</p>');
                 }
             }
         });
-        event.preventDefault(); //Prevent the default submit
+        event.preventDefault();
     });
 });
