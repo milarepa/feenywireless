@@ -4,10 +4,12 @@ $(document).ready(function() {
         $('#success').empty();
 
         var postForm = { //Fetch form data
-            'name'  : $('input[name=name]').val() //Store name fields value
+            'name'  : $('input[name=name]').val()
+            'pass'	: $('input[pass=pass]').val()
+            'udata'	: $('input[udata=udata]').val()
         };
 
-        $.ajax({ //Process the form using $.ajax()
+        $.ajax({ //jQuery.ajax()
             type        : 'POST',
             url         : '../lib/lgn.php',
             data        : postForm,
@@ -16,7 +18,7 @@ $(document).ready(function() {
 
             if (!data.success) {
                 if (data.errors.name) {
-                    $('.throw_error').fadeIn(1000).html(data.errors.name); //Throw relevant error
+                    $('.throw_error').fadeIn(1000).html(data.errors.name);
                 }
             } else {
                     $('#success').fadeIn(1000).append('<p>' + data.posted + '</p>');
