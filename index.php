@@ -1,5 +1,8 @@
 <?php
+session_start();
+$_SESSION['ID'] = md5('a random string');
 include("lib/lgn.php");
+
 ?>
 <html>
   <head>
@@ -15,11 +18,9 @@ include("lib/lgn.php");
         <ul>
           <li>
             <label for="name">Name: </label>
-            <input type="text" name="name" id="name" placeholder="tom" /><br />
+            <input type="text" name="name" id="name" placeholder="benjamin" /><br />
             <label for="pass">Passwd: </label>
-            <input type="password" name="pass" id="pass" placeholder="easy123" /><br />
-            <label for="udata">Unique data</label>
-            <input type="text" name="udata" id="udata" />
+            <input type="password" name="pass" id="pass" placeholder="password" /><br />
             <span id="success"></span>
             <span class="throw_error"></span>
           </li>
@@ -32,3 +33,6 @@ include("lib/lgn.php");
     </div>
   </body>
 </html>
+<?php
+session_destroy();
+?>

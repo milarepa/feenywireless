@@ -5,8 +5,7 @@ $(document).ready(function() {
 
         var postForm = { //Fetch form data
             'name'  : $('input[name=name]').val()
-            'pass'	: $('input[pass=pass]').val()
-            'udata'	: $('input[udata=udata]').val()
+            'pass'  : $('input[pass=pass]').val()
         };
 
         $.ajax({ //jQuery.ajax()

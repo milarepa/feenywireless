@@ -1,41 +1,56 @@
 <?php
 class ProcLog {
   /*
-   * handles field validation
-   * for login. Single user
-   * login function can be replaced
-   * with a mysqli connection
+   * custom login class.
+   * needs more work in session so
+   * that its persistant (cookie maybe) - but the idea
+   * is there.
    * */
-  
-  private static $password;
-  private static $name;
-  
-  public function __construct() { // this should accept username and password
-    $this->password = 'easy123';  // apon creation of login object
-    $this->name = 'tom';
-    $this->_udata = '';
+
+  private $password;
+  private $name;
+  private $conn;
+  public $message;
+
+  public function __construct() {
+    $this->conn = new mysqli("localhost", "root", "guru1", "feeny");
+    if($this->conn->connect_errno) {
+        $this->message = "database failed to connect";
+    }
+    $this->password = $_POST['pass'];
+    $this->name = $_POST['name'];
   }
-   
+
   public function login() {
- 
-    $_name = strip_tags($_POST['name']);
-    $_pass = strip_tags($_POST['pass']);
-    $this->_udata = $_POST['udata'];
-    
-    if($this->name == $_name) {
-      if($this->password == $_pass) {
-        return True;
+
+    $q = "SELECT user_name, password_hash, client_id from users";
+
+    if(!$stmt = $this->conn->prepare($q)) {
+      $this->message = $this->conn->error;
+      return False;
+    }
+    else {
+      if($stmt->execute()) {
+          $this->message = " statement executed ";
+          if($stmt->bind_result($n,$p,$id)) {
+            $stmt->fetch();
+            if($n == $this->name && $p == md5($this->password)) {
+              $this->message = "Login Successfull.";
+            } else {
+              $this->message = "You Are NOT logged in.<br />";
+            }
+          }
       } else {
-        return False;
+        $this->message .= " statement failed ";
       }
     }
   }
-  
+
   public function getData() {
     $rdata .= "Your account name is : " . $this->name . "<br />";
     $rdata .= "Your secret pass is : " . $this->password . "<br />";
-    $rdata .= "Your Unique Data is : " . $this->_udata . "<br />";
+    $rdata .= "Your ID is : " . $this->id . "<br />";
     return $rdata;
-  } 
+  }
 }
 ?>
