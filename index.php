@@ -21,7 +21,7 @@ include("lib/lgn.php");
         <input type="submit" value="Send" />
       </form>
       </div>
-      <label for="php_data">Entered Text back from lib/lgn.php</label>
+      <label id="phpdata" for="php_data">Entered Text back from lib/lgn.php</label>
       <div id="php_data"><?php echo $data; ?></div>
     </div>
   </body>

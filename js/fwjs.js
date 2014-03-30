@@ -11,11 +11,11 @@ $(document).ready(function() {
             type        : 'POST',
             url         : '../lib/lgn.php',
             data        : postForm,
-            dataType    : 'json',
+            dataType    : 'json', //javascript object
             success     : function(data) {
 
-            if (!data.success) { //If fails
-                if (data.errors.name) { //Returned if any error from process.php
+            if (!data.success) {
+                if (data.errors.name) {
                     $('.throw_error').fadeIn(1000).html(data.errors.name); //Throw relevant error
                 }
             } else {
