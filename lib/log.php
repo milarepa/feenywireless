@@ -13,7 +13,7 @@ class ProcLog {
   public $message;
 
   public function __construct() {
-    $this->conn = new mysqli("localhost", "root", "guru1", "feeny");
+    $this->conn = new mysqli("localhost", "root", "xxx", "feeny");
     if($this->conn->connect_errno) {
         $this->message = "database failed to connect";
     }
