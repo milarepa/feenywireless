@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    $('postForm').submit(function(event) { //Trigger on form submit
-        $('#name + .throw_error').empty(); //Clear the messages first
+    $('postForm').submit(function(event) {
+        $('#name + .throw_error').empty();
         $('#success').empty();
 
         var postForm = { //Fetch form data
@@ -8,9 +8,9 @@ $(document).ready(function() {
         };
 
         $.ajax({ //Process the form using $.ajax()
-            type        : 'POST', //Method type
-            url         : '../lib/lgn.php', //Your form processing file url
-            data        : postForm, //Forms name
+            type        : 'POST',
+            url         : '../lib/lgn.php',
+            data        : postForm,
             dataType    : 'json',
             success     : function(data) {
 
